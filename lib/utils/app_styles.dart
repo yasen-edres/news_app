@@ -22,5 +22,9 @@ class AppStyle{
     fontWeight: FontWeight.w500,
     color: AppColor.whiteColor,
   );
-
+  static const TextStyle medium12Gray = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: AppColor.grayColor,
+  );
 }

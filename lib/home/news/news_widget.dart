@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news/api/api_manager.dart';
+import 'package:news/home/news/news_item.dart';
 import 'package:news/model/NewsResponse.dart';
 import 'package:news/model/SourceResponse.dart';
 import 'package:news/utils/app_color.dart';
@@ -16,6 +16,14 @@ class NewsWidget extends StatefulWidget {
 class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
     return FutureBuilder<NewsResponse>(
         future: ApiManager.getNewsBySourceId(widget.source.id ?? ''),
         builder: (context, snapshot) {
@@ -56,10 +64,12 @@ class _NewsWidgetState extends State<NewsWidget> {
             );
           }
           var newsList = snapshot.data?.articles ?? [];
-          return ListView.builder(
+          return ListView.separated(
+            padding: EdgeInsets.only(top: height * 0.02),
+            separatorBuilder: (context, index) =>
+                SizedBox(height: height * 0.02,),
               itemBuilder: (context, index) {
-                return Text(newsList[index].title ?? '',
-                 style: Theme.of(context).textTheme.labelMedium,);
+                return NewsItem(news: newsList[index]);
               },
             itemCount: newsList.length,
           );
