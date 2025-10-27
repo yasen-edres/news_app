@@ -1,7 +1,9 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:news/api/api_constant.dart';
 import 'package:news/model/NewsResponse.dart';
+
 import '../model/SourceResponse.dart';
 import 'end_points.dart';
 class ApiManager{
@@ -13,8 +15,6 @@ class ApiManager{
      EndPoints.sourceApi,{
      'apiKey': ApiConstants.apiKey
        }
-
-
    );
    try{
      var response = await http.get(url);

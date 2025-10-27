@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoute.categoryDetailsRouteName,
+      initialRoute: AppRoute.homeRouteName,
       routes: {
         AppRoute.homeRouteName : (context) => ((HomeScreen())),
         AppRoute.categoryDetailsRouteName : (context) => ((CategoryDetails())),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
     );
   }
 
