@@ -22,6 +22,7 @@ class AppConfigItem extends StatelessWidget {
         border: Border.all(color: AppColor.whiteColor, width: 2),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(name, style: AppStyle.medium20White),
           Icon(

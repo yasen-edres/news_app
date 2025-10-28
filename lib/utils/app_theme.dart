@@ -9,12 +9,7 @@ class AppTheme{
     scaffoldBackgroundColor: AppColor.whiteColor,
     appBarTheme: AppBarTheme(
       centerTitle: true,
-      backgroundColor: AppColor.whiteColor,
-      titleTextStyle: TextStyle(
-        color: AppColor.blackColor,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
+        backgroundColor: AppColor.whiteColor
     ),
     textTheme: TextTheme(
       labelMedium: AppStyle.medium14Black,
@@ -30,11 +25,6 @@ class AppTheme{
       appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: AppColor.blackColor,
-        titleTextStyle: TextStyle(
-          color: AppColor.whiteColor,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
       ),
       textTheme: TextTheme(
         labelMedium: AppStyle.medium14White,
