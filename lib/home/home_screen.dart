@@ -30,7 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
             selectedCategory == null ?
             'Home' :
-            '${selectedCategory!.id}'),
+            '${selectedCategory!.id}', style: TextStyle(
+            color: Theme
+                .of(context)
+                .splashColor
+        ),),
         actions: [
           IconButton(
               onPressed: () {

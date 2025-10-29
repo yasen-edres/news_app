@@ -21,14 +21,7 @@ class Search extends SearchDelegate {
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: InputBorder.none,
-        hintStyle: TextStyle(color: Colors.white70),
-      ),
-      textTheme: theme.textTheme.copyWith(
-        titleLarge: const TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
+        hintStyle: TextStyle(color: Theme.of(context).primaryColor),
       ),
     );
   }
@@ -38,7 +31,7 @@ class Search extends SearchDelegate {
     return [
       IconButton(
         icon: Icon(Icons.close),
-        color: AppColor.whiteColor,
+        color: Theme.of(context).primaryColor,
         onPressed: () {
           query = "";
         },
@@ -50,7 +43,7 @@ class Search extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.arrow_back),
-      color: AppColor.whiteColor,
+      color: Theme.of(context).primaryColor,
       onPressed: () {
         close(context, null);
       },
@@ -143,7 +136,7 @@ class Search extends SearchDelegate {
           return Center(
             child: Text(
               "News Not Found",
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           );
         }
@@ -154,7 +147,7 @@ class Search extends SearchDelegate {
           return Center(
             child: Text(
               "No results found",
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           );
         }
@@ -175,7 +168,7 @@ class Search extends SearchDelegate {
       return Center(
         child: Text(
           "Type to search news...",
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
       );
     }
