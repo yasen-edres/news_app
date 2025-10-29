@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/home/home_screen.dart';
+import 'package:news/home/webview/webview.dart';
 import 'package:news/utils/app_rotes.dart';
 import 'package:news/utils/app_theme.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget{
       initialRoute: AppRoute.homeRouteName,
       routes: {
         AppRoute.homeRouteName : (context) => ((HomeScreen())),
+        AppRoute.webviewRouteName: (context) => ((Webview())),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

@@ -3,7 +3,7 @@ import 'package:news/api/api_manager.dart';
 import 'package:news/home/news/news_item.dart';
 import 'package:news/model/NewsResponse.dart';
 import 'package:news/model/SourceResponse.dart';
-import 'package:news/utils/app_color.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NewsWidget extends StatefulWidget {
   final Source source;
@@ -28,10 +28,83 @@ class _NewsWidgetState extends State<NewsWidget> {
         future: ApiManager.getNewsBySourceId(widget.source.id ?? ''),
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(
-              child: CircularProgressIndicator(
-                color: AppColor.grayColor,
-              ),
+            return ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.028,
+                    vertical: height * 0.01,
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: width * 0.028,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade300,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey.shade300,
+                    highlightColor: Colors.grey.shade100,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: height * 0.25,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        SizedBox(height: height * 0.01),
+                        Container(
+                          height: 20,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Container(
+                          height: 20,
+                          width: width * 0.6,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        SizedBox(height: height * 0.01),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 12,
+                              width: width * 0.3,
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            Container(
+                              height: 12,
+                              width: width * 0.2,
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             );
           }else if(snapshot.hasError){
             return Column(
@@ -61,6 +134,15 @@ class _NewsWidgetState extends State<NewsWidget> {
                 }, child: Text('Try Again',
                   style: Theme.of(context).textTheme.labelMedium,))
               ],
+            );
+          }
+          if (snapshot.data!.articles!.isEmpty) {
+            return Center(
+              child: Text('Ops No News Here.',
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headlineLarge,),
             );
           }
           var newsList = snapshot.data?.articles ?? [];
