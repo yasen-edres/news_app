@@ -14,7 +14,8 @@ class ApiManager{
    Uri url = Uri.https(ApiConstants.baseUrl,
      EndPoints.sourceApi,{
          'apiKey': ApiConstants.apiKey,
-         "category": categoryId
+         "category": categoryId,
+
        }
    );
    try{
@@ -45,8 +46,44 @@ class ApiManager{
   }catch(e){
     rethrow;
   }
+  }
 
+  static Future<NewsResponse> searchNews(String query) async {
+    try {
+      Uri url = Uri.https(
+        ApiConstants.baseUrl,
+        EndPoints.newsApi,
+        {
+          "q": query,
+          "searchIn": "title,description,content",
+          "apiKey": ApiConstants.apiKey,
+        },
+      );
 
+      var response = await http.get(url);
 
-}
+      if (response.statusCode != 200) {
+        return NewsResponse(status: "error", articles: []);
+      }
+
+      var json = jsonDecode(response.body);
+      NewsResponse data = NewsResponse.fromJson(json);
+
+      data.articles ??= [];
+
+      // فلترة الصور الغير صالحة
+      data.articles!.removeWhere(
+            (news) =>
+        news.urlToImage == null ||
+            news.urlToImage!.isEmpty ||
+            !news.urlToImage!.startsWith("http") ||
+            news.urlToImage!.contains("timthumb.php") ||
+            news.urlToImage!.contains("?src="),
+      );
+
+      return data;
+    } catch (e) {
+      return NewsResponse(status: "error", articles: []);
+    }
+  }
 }
