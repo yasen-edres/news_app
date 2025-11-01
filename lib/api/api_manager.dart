@@ -80,10 +80,10 @@ class ApiManager{
             news.urlToImage!.contains("timthumb.php") ||
             news.urlToImage!.contains("?src="),
       );
-
       return data;
     } catch (e) {
       return NewsResponse(status: "error", articles: []);
     }
   }
+
 }

@@ -11,9 +11,10 @@ class Search extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final theme = Theme.of(context);
     return theme.copyWith(
-      indicatorColor: AppColor.blackColor,
+        indicatorColor: AppColor.whiteColor,
       appBarTheme: AppBarTheme(
         backgroundColor: theme.splashColor,
+
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(22)),
@@ -23,6 +24,13 @@ class Search extends SearchDelegate {
         border: InputBorder.none,
         hintStyle: TextStyle(color: Theme.of(context).primaryColor),
       ),
+        textTheme: TextTheme(
+            headlineLarge: TextStyle(
+                color: Theme
+                    .of(context)
+                    .primaryColor
+            )
+        )
     );
   }
 
