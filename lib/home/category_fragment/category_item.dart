@@ -6,7 +6,7 @@ class CategoryItem extends StatelessWidget {
   final Category category;
   final int index;
 
-  CategoryItem({super.key, required this.category, required this.index});
+  const CategoryItem({super.key, required this.category, required this.index});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:news/model/category.dart';
 import 'package:news/utils/app_color.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
             selectedCategory == null ?
             'Home' :
-            '${selectedCategory!.id}', style: TextStyle(
+            selectedCategory!.id, style: TextStyle(
             color: Theme
                 .of(context)
                 .splashColor

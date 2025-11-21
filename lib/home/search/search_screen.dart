@@ -11,8 +11,7 @@ class Search extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final theme = Theme.of(context);
     return theme.copyWith(
-        indicatorColor: AppColor.whiteColor,
-      appBarTheme: AppBarTheme(
+        appBarTheme: AppBarTheme(
         backgroundColor: theme.splashColor,
 
         elevation: 0,
@@ -30,7 +29,7 @@ class Search extends SearchDelegate {
                     .of(context)
                     .primaryColor
             )
-        )
+        ), tabBarTheme: TabBarThemeData(indicatorColor: AppColor.whiteColor)
     );
   }
 

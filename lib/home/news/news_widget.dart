@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:news/api/api_manager.dart';
 import 'package:news/home/news/news_item.dart';
 import 'package:news/model/NewsResponse.dart';
 import 'package:news/model/SourceResponse.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../api/dio_api_manger.dart';
 
 class NewsWidget extends StatefulWidget {
   final Source source;
@@ -25,7 +26,7 @@ class _NewsWidgetState extends State<NewsWidget> {
         .size
         .height;
     return FutureBuilder<NewsResponse>(
-        future: ApiManager.getNewsBySourceId(widget.source.id ?? ''),
+      future: DioApiManager.getNewsBySourceId(widget.source.id ?? ''),
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
             return ListView.builder(
@@ -112,7 +113,7 @@ class _NewsWidgetState extends State<NewsWidget> {
                 Text('SomeThing Went Wrong',
                 style: Theme.of(context).textTheme.labelMedium),
                 ElevatedButton(onPressed: (){
-                  ApiManager.getNewsBySourceId(widget.source.id ?? '');
+                  DioApiManager.getNewsBySourceId(widget.source.id ?? '');
                   setState(() {
 
                   });
@@ -127,7 +128,7 @@ class _NewsWidgetState extends State<NewsWidget> {
                 Text(snapshot.data!.message!,
                     style: Theme.of(context).textTheme.labelMedium),
                 ElevatedButton(onPressed: (){
-                  ApiManager.getNewsBySourceId(widget.source.id ?? '');
+                  DioApiManager.getNewsBySourceId(widget.source.id ?? '');
                   setState(() {
 
                   });

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/api/api_manager.dart';
+import 'package:news/api/dio_api_manger.dart';
 import 'package:news/home/category_details/sources_tab_widget.dart';
 import 'package:news/model/SourceResponse.dart';
 import 'package:news/model/category.dart';
@@ -29,7 +29,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     return Scaffold(
 
       body: FutureBuilder<SourceResponse>(
-        future: ApiManager.getSources(categoryId: widget.category.id),
+        future: DioApiManager.getSources(categoryId: widget.category.id),
           builder: (context, snapshot) {
             //todo: loading
             if(snapshot.connectionState == ConnectionState.waiting){
@@ -122,7 +122,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       backgroundColor: AppColor.grayColor
                     ),
                     onPressed: (){
-                      ApiManager.getSources(categoryId: widget.category.id);
+                      DioApiManager.getSources(categoryId: widget.category.id);
                       setState(() {
       
                       });
@@ -143,7 +143,8 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                           backgroundColor: AppColor.grayColor
                       ),
                       onPressed: (){
-                        ApiManager.getSources(categoryId: widget.category.id);
+                        DioApiManager.getSources(
+                            categoryId: widget.category.id);
                         setState(() {
       
                         });
