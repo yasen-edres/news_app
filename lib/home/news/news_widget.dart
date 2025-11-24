@@ -17,6 +17,7 @@ class NewsWidget extends StatefulWidget {
 class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
+    var dio = DioApiManager();
     var width = MediaQuery
         .of(context)
         .size
@@ -26,7 +27,7 @@ class _NewsWidgetState extends State<NewsWidget> {
         .size
         .height;
     return FutureBuilder<NewsResponse>(
-      future: DioApiManager.getNewsBySourceId(widget.source.id ?? ''),
+      future: dio.getNewsBySourceId(widget.source.id ?? ''),
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
             return ListView.builder(
@@ -113,7 +114,7 @@ class _NewsWidgetState extends State<NewsWidget> {
                 Text('SomeThing Went Wrong',
                 style: Theme.of(context).textTheme.labelMedium),
                 ElevatedButton(onPressed: (){
-                  DioApiManager.getNewsBySourceId(widget.source.id ?? '');
+                  dio.getNewsBySourceId(widget.source.id ?? '');
                   setState(() {
 
                   });
@@ -128,7 +129,7 @@ class _NewsWidgetState extends State<NewsWidget> {
                 Text(snapshot.data!.message!,
                     style: Theme.of(context).textTheme.labelMedium),
                 ElevatedButton(onPressed: (){
-                  DioApiManager.getNewsBySourceId(widget.source.id ?? '');
+                  dio.getNewsBySourceId(widget.source.id ?? '');
                   setState(() {
 
                   });
