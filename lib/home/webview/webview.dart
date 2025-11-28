@@ -11,6 +11,7 @@ class Webview extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: WebViewWidget(
           controller: WebViewController()

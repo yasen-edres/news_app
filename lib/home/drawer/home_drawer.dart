@@ -43,7 +43,7 @@ class HomeDrawer extends StatelessWidget {
               }
               appTheme.changeTheme(ThemeMode.light);
             },
-            child: AppConfigItem(name: '${appTheme.appTheme.name}')),
+            child: AppConfigItem(name: appTheme.appTheme.name)),
         SizedBox(height: height * 0.04),
         DividerItem(),
         DrawerItem(iconName: AppAsset.languageIcon, text: 'Language'),

@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:news/api/api_manager.dart';
+import 'package:news/api/app_exception.dart';
+import 'package:news/api/dio_api_manger.dart';
 import 'package:news/home/category_details/sources_tab_widget.dart';
 import 'package:news/model/SourceResponse.dart';
 import 'package:news/model/category.dart';
@@ -18,6 +20,7 @@ class CategoryDetails extends StatefulWidget {
 class _CategoryDetailsState extends State<CategoryDetails> {
   @override
   Widget build(BuildContext context) {
+    var dio = DioApiManager();
     var width = MediaQuery
         .of(context)
         .size
@@ -29,7 +32,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     return Scaffold(
 
       body: FutureBuilder<SourceResponse>(
-        future: ApiManager.getSources(categoryId: widget.category.id),
+        future: dio.getSources(categoryId: widget.category.id),
           builder: (context, snapshot) {
             //todo: loading
             if(snapshot.connectionState == ConnectionState.waiting){
@@ -112,50 +115,99 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                 },
               );
             }
-            //todo: error => client
             else if(snapshot.hasError){
-              return Column(
-                children: [
-                  Text('Something Went Wrong'),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.grayColor
-                    ),
-                    onPressed: (){
-                      ApiManager.getSources(categoryId: widget.category.id);
-                      setState(() {
-      
-                      });
-                    }, child: Text('Try Again',
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ))
-                ],
+              String errorMessage;
+              //todo: object => dio exception
+              //todo: object dio exception => error => object app exception
+              if (snapshot.error is DioException &&
+                  (snapshot.error as DioException).error is AppException
+              ) {
+                //todo: parsing DioException object => AppException object.
+                errorMessage =
+                    ((snapshot.error as DioException).error as AppException)
+                        .message;
+              } else {
+                errorMessage = snapshot.error.toString();
+              }
+              return Center(
+                child: Column(
+                  children: [
+                    Text(errorMessage,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headlineMedium,),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.grayColor
+                        ),
+                        onPressed: () {
+                          dio.getSources(categoryId: widget.category.id);
+                          setState(() {
+
+                          });
+                        }, child: Text('Try Again',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .labelMedium,
+                    ))
+                  ],
+                ),
               );
             }
             //todo: server => response => success , error
             if(snapshot.data?.status != 'ok'){
-              return Column(
-                children: [
-                  Text(snapshot.data!.message!,
-                  style: Theme.of(context).textTheme.labelMedium,),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColor.grayColor
-                      ),
-                      onPressed: (){
-                        ApiManager.getSources(categoryId: widget.category.id);
-                        setState(() {
-      
-                        });
-                      }, child: Text('Try Again',
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ))
-                ],
+              return Center(
+                child: Column(
+                  children: [
+                    Text(snapshot.data!.message!,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .labelMedium,),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.grayColor
+                        ),
+                        onPressed: () {
+                          dio.getSources(
+                              categoryId: widget.category.id);
+                          setState(() {
+
+                          });
+                        }, child: Text('Try Again',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .labelMedium,
+                    ))
+                  ],
+                ),
+              );
+            } else if (snapshot.hasData) {
+            var sourcesList = snapshot.data?.sources ?? [];
+            if (sourcesList == null || sourcesList.isEmpty) {
+              return Center(
+                child: Text('no sources found',
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headlineMedium,),
+              );
+            } else {
+              //todo: server => response => success
+              return SourcesTabWidget(sourcesList: sourcesList);
+            }
+            } else {
+              return Center(
+                child: Text('starting fetching source ',
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headlineMedium,),
               );
             }
-            //todo: server => response => success
-            var sourcesList = snapshot.data?.sources ?? [];
-            return SourcesTabWidget(sourcesList: sourcesList);
           },
       ),
     );
