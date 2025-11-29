@@ -1,12 +1,15 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:news/home/home_screen.dart';
 import 'package:news/home/webview/webview.dart';
 import 'package:news/provider/app_theme_provider.dart';
 import 'package:news/utils/app_rotes.dart';
 import 'package:news/utils/app_theme.dart';
+import 'package:news/utils/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  Bloc.observer = MyBlocObserver();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => AppThemeProvider()),
