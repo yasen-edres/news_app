@@ -12,7 +12,7 @@
 
 ## About The App
 
-A comprehensive news application developed using Flutter, delivering the latest news from various categories through REST API integration. The app features a responsive design with light and dark theme support, efficient state management, and seamless user experience. Built on Clean Architecture principles to ensure code quality and maintainability.
+A comprehensive news application developed using Flutter, delivering the latest news from various categories through REST API integration. This project marks my first complete experience with API consumption, where I implemented asynchronous programming using multiple networking packages (HTTP, Dio, and Retrofit). The app features a responsive design with light and dark theme support, efficient state management with Cubit, and a fully responsive UI that handles all application states to enhance user experience. Built on Clean Architecture principles to ensure code quality and maintainability.
 
 ---
 
@@ -93,10 +93,14 @@ A comprehensive news application developed using Flutter, delivering the latest 
 
 ### State Management
 - **Flutter Bloc (Cubit)** - For efficient state management and business logic separation
+- **Responsive UI for All States** - Loading, Success, Error, and Empty states with proper UI feedback
 
 ### Networking
-- **HTTP/Dio** - For REST API integration
+- **HTTP** - Basic HTTP requests
+- **Dio** - Advanced HTTP client with interceptors
+- **Retrofit** - Type-safe REST client
 - **News API** - For fetching real-time news data
+- **Asynchronous Programming** - Future, async/await patterns
 
 ### Theme Management
 - **Provider** - For theme state management
@@ -228,16 +232,20 @@ news_app/
 
 ## Learning Objectives
 
-This app was developed as a professional project to master:
-- Clean Architecture principles
-- BLoC/Cubit state management pattern
-- REST API integration
-- Theme management with Provider
-- WebView implementation
-- Responsive UI design
-- Error handling strategies
-- Search functionality implementation
-- Navigation patterns in Flutter
+This app was developed as my first complete project working with REST APIs, focusing on:
+- **API Consumption** - First experience with complete API integration
+- **Multiple HTTP Packages** - Implemented using HTTP, Dio, and Retrofit
+- **Asynchronous Programming** - Mastering Future, async/await, and Stream
+- **Clean Architecture principles**
+- **BLoC/Cubit state management pattern**
+- **Comprehensive State Handling** - Building responsive UI for all states (Loading, Success, Error, Empty)
+- **Theme management with Provider**
+- **WebView implementation**
+- **Responsive UI design**
+- **Error handling strategies**
+- **Search functionality implementation**
+- **Navigation patterns in Flutter**
+- **User Experience Enhancement** - Proper feedback for all user interactions
 
 ---
 
