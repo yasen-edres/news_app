@@ -14,8 +14,9 @@ workflows:
         script: |
           flutter pub get
 
-      - name: Install CocoaPods
+      - name: Generate Podfile and install CocoaPods
         script: |
+          flutter build ios --config-only --no-codesign
           cd ios
           pod install
 
